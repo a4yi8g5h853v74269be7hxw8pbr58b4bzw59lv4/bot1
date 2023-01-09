@@ -1,8 +1,14 @@
-import requests,random,json
-def ops (to,ic):
- user= input("[?] user : ")
+import requests,json
+from colorama import Fore
+red= Fore.RED
+gre= Fore.GREEN
+we=Fore.WHITE
+dr= Fore.LIGHTBLACK_EX
+ya= Fore.YELLOW
+def ops (to,icc):
+ user= input(f"{we}[{dr}?{we}] {dr}user : {we}")
  urm="https://jftv.pythonanywhere.com/IGMail/"
- tt=f"https://api.telegram.org/{to}/sendMessage?chat_id={ic}&text="
+ tt=f"https://api.telegram.org/{to}/sendMessage?chat_id={icc}&text="
  ic="https://o7aa.pythonanywhere.com/?id="
  urlg='https://android.clients.google.com/setup/checkavail'
  hedg={
@@ -16,27 +22,44 @@ def ops (to,ic):
  'version':'3',
  'firstName':'NMCT',
  'lastName':'STORE'})
- no="-> It's not available"
+ no=f"{we}[{red}!{we}] It's not available"
  try:
   user=user.split("/")[3]
   user=user.split("?")[0] or user.split("/")[0]
  except:
   pass
  Req = requests.post("https://i.instagram.com:443/api/v1/users/lookup/", headers={"User-Agent":"Instagram 187.0.0.32.120 Android(29 / 10; 480dpi; 1080x2107; HUAWEI; MAR - LX1M; HWMAR; kirin710; en_US; 289692181)"}, data={"q":user})
- print (Req.text)
  if '"status":"ok"' in Req.text:
-  iid=Req.json()["user_id"]
+  iid=f'{Req.json()["user_id"]}'
+  iid=len(iid)
+  if iid <= 6:
+  	dat="2010"
+  	g=f"{we}[{gre}!{we}]"
+  elif iid == 7 :
+  	dat="2011"
+  	g=f"{we}[{gre}!{we}]"
+  elif iid == 8 :
+  	dat="2012"
+  	g=f"{we}[{gre}!{we}]"
+  elif iid == 9 :
+  	dat="2013"
+  	g=f"{we}[{gre}!{we}]"
+  elif iid >= 11 :
+  	dat="not old"
+  	g=f"{we}[{red}!{we}]"
   do=Req.json()["obfuscated_email"]
   if "*@g*.com" == do:
    res = requests.post(url=urlg,data=datg,headers=hedg)
    if res.text == '{"status":"SUCCESS"}':
     rm=requests.get(urm+user+"@googlemail.com").text
     if "Linked Or Ban" in rm:
-     x=requests.get(ic+iid).json()
-     idd=x["data"]
+     print(f"{we}[{gre}!{we}] It's available\n{we}[{gre}!{we}]email : {gre}{user}@googlemail.com{we}\n{g} data : {dat}")
      if t == 1 :
-      requests.post(tt+"USER : "+user+"\nEMAIL : "+user+"@googlemail.com\nDATA : "+idd)
-     print(f"-> It's available\n-> email : {user}@googlemail.com")
+     	try:
+     		requests.post(tt+"USER : "+user+"\nEMAIL : "+user+"@gmail.com\nDATA : "+dat+"\n@zxxxxzv")
+     		print(f"{we}[{gre}!{we}] done send tele ")
+     	except:
+     		print(f"{we}[{red}!{we}] error send tele ")
     else:
      print(no)
    else:
@@ -46,29 +69,31 @@ def ops (to,ic):
    if res.text == '{"status":"SUCCESS"}':
     rm=requests.get(urm+user+"@gmail.com").text
     if "Linked Or Ban" in rm:
-     x=requests.get(ic+iid).json()
-     idd=x["data"]
+     print(f"{we}[{gre}!{we}] It's available\n{we}[{gre}!{we}]email : {gre}{user}@gmail.com{we}\n{g} data : {dat}")
      if t == 1 :
-      requests.post(tt+"USER : "+user+"\nEMAIL : "+user+"@gmail.com\nDATA : "+idd+"\n@zxxxxzv")
-     print(f"-> It's available\n-> email : {user}@gmail.com")
+      try:
+      	requests.post(tt+"USER : "+user+"\nEMAIL : "+user+"@gmail.com\nDATA : "+dat+"\n@zxxxxzv")
+      	print(f"{we}[{gre}!{we}] done send tele ")
+      except:
+      	print(f"{we}[{red}!{we}] error send tele ")
     else:
      print(no)
    else:
     print(no)
   else:
-   print("-> domen : "+do)
+   print(f"{we}[{ya}!{we}] maybe available \n{we}[{ya}!{we}] domen : {ya}{do}\n{g} data : {dat}")
  elif Req.text == '{"message":"No users found","status":"fail"}':
-  print("-> No users found")
+  print(f"{we}[{red}!{we}] No users found")
  elif "Please wait a few minutes before you try again" in Req.text:
-  input("\n[!] try with vpn")
+  input(f"\n{we}[{red}!{we}] try with vpn")
  else:
-  print("[!!!] ERROR .... Send a screenshot to me")
+  print(f"{we}[{red}!{we}] ERROR ... Send a screenshot to me")
 t=int(input("[?] send to tele : 1 > yes , 2 > no\n[>] "))
 if t == 1 :
-	ic=int(input("[?] id : "))
+	icc=int(input("[?] id : "))
 	to=input("[?] token : ")
 else:
-	ic=0
+	icc=0
 	to=""
 while 1 :
- ops(to,ic)
+ ops(to,icc)
